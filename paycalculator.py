@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 
+st.image("DV_alone.png", caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+#st.subheader("presents...")
+
 # Set the title and subtitle
 st.title("Pay Award Calculator for Doctors and Dentists in training in England")
 st.write("This calculator will give you an estimated pay award backpayment, it may not be 100% correct but will give you a chance to compare it to your payslip. If there are big discrepancies, you should raise it with your employer.")
