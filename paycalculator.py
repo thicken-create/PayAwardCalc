@@ -145,8 +145,8 @@ strikeDeduction1 = ((total_awardmth1/30) * (dataApr + dataJun + dataJul))
 strikeDeduction2 = ((total_awardmth2/30) * (dataAug))
 
 
-tot_strikeDeduction = -(strikeDeduction1 + strikeDeduction2)
-pay_w_deduction = total_pay_award - tot_strikeDeduction
+tot_strikeDeduction = -(strikeDeduction1)
+pay_w_deduction = total_pay_award + tot_strikeDeduction
 
 formatted_pay_w_deductions = f"£{pay_w_deduction:.2f}"
 formatted_strike_deduction = f"{tot_strikeDeduction:.2f}"
