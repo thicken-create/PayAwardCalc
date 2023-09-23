@@ -166,7 +166,7 @@ with col2:
 
 st.header("What should your payslip look like?")
 
-Basic_Arrs = data1_awardmth*4 + data7_awardmth
+Basic_Arrs = (data1_awardmth*4 + data7_awardmth) - strikeDeduction1
 Addn_Arrs = data2_awardmth*4 + data8_awardmth
 nroc_arrs = data3_awardmth*4 + data9_awardmth
 Wknd_Arrs = data4_awardmth*4 + data10_awardmth
@@ -178,7 +178,7 @@ st.write("Backpaid Pay Award Breakdown:")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.metric(label="Basic Pay Arrs", value=f"£{Basic_Arrs:.2f}")
+    st.metric(label="Basic Pay Arrs", value=f"£ {Basic_Arrs:.2f}")
     st.metric(label="Addn Ros Hrs NP Arrs", value=f"£ {Addn_Arrs:.2f}",) 
     st.metric(label="Night Duty 37% Arrs", value=f"£ {Night_Arrs:.2f}") 
 with col2:
