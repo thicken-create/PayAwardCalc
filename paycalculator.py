@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 
+def validate_positive_number(input_value):
+    if input_value < 0:
+        return "Please enter a positive number."
+    return None
+
 # Set the title and subtitle
 st.title("Pay Award Calculator for Doctors and Dentists in training in England")
 st.write("This calculator will give you an estimated pay award backpayment, it may not be 100% correct but will give you a chance to compare it to your payslip. If there are big discrepancies, you should raise it with your employer.")
@@ -33,12 +38,12 @@ def rounded_rectangle(text):
 with col1:
     st.header("April-July WS")
     # Data entry variables for column 1
-    data1 = st.number_input("Basic Pay (£ per year)", value=51017, step = 1000, key="Apr1")
-    data2 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=7.5, step = 0.1, key="Apr2")
+    data1 = st.number_input("Basic Pay (£ per year)", value=51017, step = 1000, key="Apr1", on_change=validate_positive_number)
+    data2 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=7.5, step = 0.1, key="Apr2", on_change=validate_positive_number)
     data3 = st.selectbox("Non-Resident on Call?", nroc_options, key="Apr3", index = 0)
     data4 = st.selectbox("Weekend allowance", wknd_options, key="Apr4", index = 3)
-    data5 = st.number_input("Hours attracting 37% enhancement (in hours)", value=7.5, step = 0.1, key="Apr5")
-    data6 = st.number_input("Flexible Pay Premia (in £)", value=0.00, step = 1000.00, key="Apr6")
+    data5 = st.number_input("Hours attracting 37% enhancement (in hours)", value=7.5, step = 0.1, key="Apr5", on_change=validate_positive_number)
+    data6 = st.number_input("Flexible Pay Premia (in £)", value=0.00, step = 1000.00, key="Apr6", on_change=validate_positive_number)
 
 
     data2_calc = ((data2)*((data1/52)/40))*52 #Calculates Additional Pay
@@ -86,12 +91,12 @@ with col1:
 with col2:
     st.header("August WS")
     # Data entry variables for column 2
-    data7 = st.number_input("Basic Pay (£ per year)", value=58398, key="Aug1")
-    data8 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=5.5, key="Aug2")
+    data7 = st.number_input("Basic Pay (£ per year)", value=58398, key="Aug1", on_change=validate_positive_number)
+    data8 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=5.5, key="Aug2", on_change=validate_positive_number)
     data9 = st.selectbox("Non-Resident on Call?", nroc_options, key="Aug3", index=1)
     data10 = st.selectbox("Weekend allowance", wknd_options, key="Aug4", index = 4)
-    data11 = st.number_input("Hours attracting 37% enhancement (in hours)", value=1.75, key="Aug5")
-    data12 = st.number_input("Flexible Pay Premia (in £)", value=0.00, key="Aug6")
+    data11 = st.number_input("Hours attracting 37% enhancement (in hours)", value=1.75, key="Aug5", on_change=validate_positive_number)
+    data12 = st.number_input("Flexible Pay Premia (in £)", value=0.00, key="Aug6", on_change=validate_positive_number)
 
     data8_calc = ((data8)*((data7/52)/40))*52 #Calculates Additional Pay
     data9_calc = (nroc_options[data9]/100)*data7 #Calculates NROC
@@ -140,10 +145,10 @@ with col2:
     st.write(summary_df, index=False)
 
 st.header("How many days did you strike for?")
-dataApr = st.number_input("How many days in April?", value=0, step = 1, key="AprStrike")
-dataJun = st.number_input("How many days in June?", value=0, step = 1, key="JunStrike")
-dataJul = st.number_input("How many days in July?", value=0, step = 1, key="JulStrike")
-dataAug = st.number_input("How many days in August?", value=0, step = 1, key="AugStrike")
+dataApr = st.number_input("How many days in April?", value=0, step = 1, key="AprStrike", on_change=validate_positive_number)
+dataJun = st.number_input("How many days in June?", value=0, step = 1, key="JunStrike", on_change=validate_positive_number)
+dataJul = st.number_input("How many days in July?", value=0, step = 1, key="JulStrike", on_change=validate_positive_number)
+dataAug = st.number_input("How many days in August?", value=0, step = 1, key="AugStrike", on_change=validate_positive_number)
 
 strikeDeduction1 = ((total_awardmth1/30) * (dataApr + dataJun + dataJul))
 strikeDeduction2 = ((total_awardmth2/30) * (dataAug))
