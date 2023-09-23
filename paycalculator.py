@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 def validate_positive_number(input_value):
-    if input_value < 0:
+    if input_value <= 0:
         return "Please enter a positive number."
     return None
 
