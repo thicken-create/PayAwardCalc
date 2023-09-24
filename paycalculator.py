@@ -70,10 +70,10 @@ with col1:
     ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft1") / 100.0
     data1_key = f"Apr1_{ltft}"  
     data1 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data0] * ltft, step = 1000.0, key="data1_key")*ltft
-    data2 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=7.5, step = 0.1, key="Apr2")
+    data2 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=7.5, step = 0.1, key="Apr2", min_value=0.0, max_value=100.0)
     data3 = st.selectbox("Non-Resident on Call?", nroc_options, key="Apr3", index = 0)
     data4 = st.selectbox("Weekend allowance", wknd_options, key="Apr4", index = 3)
-    data5 = st.number_input("Hours attracting 37% enhancement (in hours)", value=7.5, step = 0.1, key="Apr5")
+    data5 = st.number_input("Hours attracting 37% enhancement (in hours)", value=7.5, step = 0.1, key="Apr5", min_value=0.0, max_value=100.0)
     data6 = st.selectbox("Flexible Pay Premia?", flex_options, key="Apr6", index=1)
 
     data2_calc = (((data2)*((data1/52)/40))*52) #Calculates Additional Pay
@@ -128,10 +128,10 @@ with col2:
     ltft2 = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft2") / 100.0
     data7_key = f"Apr1_{ltft2}"  
     data7 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data13] * ltft2, key="Aug1")
-    data8 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=5.5, key="Aug2")
+    data8 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=5.5, key="Aug2", min_value=0.0, max_value=100.0)
     data9 = st.selectbox("Non-Resident on Call?", nroc_options, key="Aug3", index=1)
     data10 = st.selectbox("Weekend allowance", wknd_options, key="Aug4", index = 4)
-    data11 = st.number_input("Hours attracting 37% enhancement (in hours)", value=1.75, key="Aug5")
+    data11 = st.number_input("Hours attracting 37% enhancement (in hours)", value=1.75, key="Aug5", min_value=0.0, max_value=100.0)
     data12 = st.selectbox("Flexible Pay Premia?", flex_options, key="Aug6", index=1)
 
     data8_calc = ((data8)*((data7/52)/40))*52 #Calculates Additional Pay
@@ -182,10 +182,10 @@ with col2:
     st.write(summary_df, index=False)
 
 st.header("How many days did you strike for?")
-dataApr = st.number_input("How many days in April?", value=0, step = 1, key="AprStrike")
-dataJun = st.number_input("How many days in June?", value=0, step = 1, key="JunStrike")
-dataJul = st.number_input("How many days in July?", value=0, step = 1, key="JulStrike")
-dataAug = st.number_input("How many days in August?", value=0, step = 1, key="AugStrike")
+dataApr = st.number_input("How many days in April?", value=0, step = 1, key="AprStrike", min_value=0, max_value=100)
+dataJun = st.number_input("How many days in June?", value=0, step = 1, key="JunStrike", min_value=0, max_value=100)
+dataJul = st.number_input("How many days in July?", value=0, step = 1, key="JulStrike", min_value=0, max_value=100)
+dataAug = st.number_input("How many days in August?", value=0, step = 1, key="AugStrike", min_value=0, max_value=100)
 
 strikeDeduction1 = ((total_awardmth1/30) * (dataApr + dataJun + dataJul))
 strikeDeduction2 = ((total_awardmth2/30) * 0)
