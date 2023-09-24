@@ -188,7 +188,7 @@ dataJul = st.number_input("How many days in July?", value=0, step = 1, key="JulS
 dataAug = st.number_input("How many days in August?", value=0, step = 1, key="AugStrike")
 
 strikeDeduction1 = ((total_awardmth1/30) * (dataApr + dataJun + dataJul))
-strikeDeduction2 = ((total_awardmth2/30) * (dataAug))
+strikeDeduction2 = ((total_awardmth2/30))
 
 
 tot_strikeDeduction = -(strikeDeduction1 + strikeDeduction2)
