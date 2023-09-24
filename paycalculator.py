@@ -12,6 +12,7 @@ st.write("This calculator will give you an estimated pay award backpayment, it m
 col1, col2 = st.columns(2)
 
 #Setting Option Values
+
 wknd_options = {
     '<1:8 -- 0%': 0.0,
     '<1:7 - 1:8 -- 3%': 3.0,
@@ -66,21 +67,23 @@ with col1:
     # Data entry variables for column 1
     data0 = st.selectbox("Select your grade.", list(grade_options1.keys()), key="grade1")
     data0_index = list(grade_options1.keys()).index(data0)  # Get the index of the selected grade
-    data1 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data0], step = 1000, key="Apr1")
+    ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft1") / 100.0
+    data1_key = f"Apr1_{ltft}"  
+    data1 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data0] * ltft, step = 1000.0, key="data1_key")*ltft
     data2 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=7.5, step = 0.1, key="Apr2")
     data3 = st.selectbox("Non-Resident on Call?", nroc_options, key="Apr3", index = 0)
     data4 = st.selectbox("Weekend allowance", wknd_options, key="Apr4", index = 3)
     data5 = st.number_input("Hours attracting 37% enhancement (in hours)", value=7.5, step = 0.1, key="Apr5")
     data6 = st.selectbox("Flexible Pay Premia?", flex_options, key="Apr6", index=1)
 
-    data2_calc = ((data2)*((data1/52)/40))*52 #Calculates Additional Pay
+    data2_calc = (((data2)*((data1/52)/40))*52) #Calculates Additional Pay
     data3_calc = (nroc_options[data3]/100)*data1 #Calculates NROC
     data4_calc = (wknd_options[data4]/100)*data1 #Calculates WKND
     data5_calc = ((data5)*((data1/52)/40)*0.37)*52
     data6_calc = (flex_options[data6])
     total_1 = data1 + data2_calc + data3_calc + data4_calc + data5_calc + data6_calc
 
-    data1_waward = (data1*1.06)+1250
+    data1_waward = (data1*1.06)+(1250*ltft)
     data2_waward = (data2*((data1_waward/52)/40))*52
     data3_waward = (nroc_options[data3]/100)*data1_waward
     data4_waward = (wknd_options[data4]/100)*data1_waward
@@ -122,7 +125,9 @@ with col2:
     data13 = st.selectbox("Select your grade.", list(grade_options1.keys()), key="grade2")
     data13_index = list(grade_options1.keys()).index(data13)  # Get the index of the selected grade
     # Data entry variables for column 2
-    data7 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data13], key="Aug1")
+    ltft2 = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft2") / 100.0
+    data7_key = f"Apr1_{ltft2}"  
+    data7 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data13] * ltft2, key="Aug1")
     data8 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=5.5, key="Aug2")
     data9 = st.selectbox("Non-Resident on Call?", nroc_options, key="Aug3", index=1)
     data10 = st.selectbox("Weekend allowance", wknd_options, key="Aug4", index = 4)
@@ -136,7 +141,7 @@ with col2:
     data12_calc = (flex_options[data12])
     total_2 = data7 + data8_calc + data9_calc + data10_calc + data11_calc + data12_calc
 
-    data7_waward = (data7*1.06)+1250
+    data7_waward = (data7*1.06)+(1250*ltft2)
     data8_waward = (data8*((data7_waward/52)/40))*52
     data9_waward = (nroc_options[data9]/100)*data7_waward
     data10_waward = (wknd_options[data10]/100)*data7_waward
