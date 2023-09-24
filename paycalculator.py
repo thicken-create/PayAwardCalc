@@ -64,10 +64,16 @@ grade_options2 = {
 # Column 1: Data Entry
 with col1:
     st.header("April-July WS")
+    reset_ltft1 = st.checkbox("Tick to disable this section", key="reset_ltft1", value=0)
+
     # Data entry variables for column 1
     data0 = st.selectbox("Select your grade.", list(grade_options1.keys()), key="grade1")
     data0_index = list(grade_options1.keys()).index(data0)  # Get the index of the selected grade
-    ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft1") / 100.0
+    if reset_ltft1:
+            ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=0.0, value=0.0, key="ltft") / 100.0
+    else:
+            ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft") / 100.0
+              #  ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft1") / 100.0
     data1_key = f"Apr1_{ltft}"  
     data1 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data0] * ltft, step = 1000.0, key="data1_key")*ltft
     data2 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=7.5, step = 0.1, key="Apr2", min_value=0.0, max_value=100.0)
@@ -75,6 +81,7 @@ with col1:
     data4 = st.selectbox("Weekend allowance", wknd_options, key="Apr4", index = 3)
     data5 = st.number_input("Hours attracting 37% enhancement (in hours)", value=7.5, step = 0.1, key="Apr5", min_value=0.0, max_value=100.0)
     data6 = st.selectbox("Flexible Pay Premia?", flex_options, key="Apr6", index=1)
+
 
     data2_calc = (((data2)*((data1/52)/40))*52) #Calculates Additional Pay
     data3_calc = (nroc_options[data3]/100)*data1 #Calculates NROC
@@ -105,8 +112,6 @@ with col1:
     data6_awardmth = data6_award/12
     total_awardmth1 = data1_awardmth + data2_awardmth + data3_awardmth + data4_awardmth + data5_awardmth + data6_awardmth
 
-
-
      # Create a DataFrame for the summary table
     summary_data = {
         "Pay Category": ["Basic Pay", "Additional Pay", "NROC", "Weekend Allowance", "Enhancement Hours", "Flexible Pay", "Total"],
@@ -120,13 +125,18 @@ with col1:
 
 # Column 2: Data Entry
 with col2:
-    st.header("August WS")
-    
+    st.header("August WS") 
+    reset_ltft2 = st.checkbox("Tick to disable this section", key="reset_ltft2", value=0)
+
     data13 = st.selectbox("Select your grade.", list(grade_options1.keys()), key="grade2")
     data13_index = list(grade_options1.keys()).index(data13)  # Get the index of the selected grade
     # Data entry variables for column 2
-    ltft2 = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft2") / 100.0
-    data7_key = f"Apr1_{ltft2}"  
+    if reset_ltft2:
+            ltft2 = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=0.0, value=0.0, key="ltft2") / 100.0
+    else:
+            ltft2 = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft2") / 100.0
+  #  ltft2 = st.number_input("Proportion Full Time in %.", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft2") / 100.0
+  #  data7_key = f"Apr1_{ltft2}"  
     data7 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data13] * ltft2, key="Aug1")
     data8 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=5.5, key="Aug2", min_value=0.0, max_value=100.0)
     data9 = st.selectbox("Non-Resident on Call?", nroc_options, key="Aug3", index=1)
@@ -164,11 +174,13 @@ with col2:
     total_awardmth2 = data7_awardmth + data8_awardmth + data9_awardmth + data10_awardmth + data11_awardmth + data12_awardmth
     total_pay_award = total_awardmth1*4 + total_awardmth2
 
-    formatted_total_awardmth2 = f"{total_awardmth2:.2f}"
     formatted_total_awardmth1 = f"{total_awardmth1:.2f}"
+    formatted_total_awardmth2 = f"{total_awardmth2:.2f}"
+    
 
     formatted_total_pay_award = f"£{total_pay_award:.2f}"
 
+   
 
   # Create a DataFrame for the summary table
     summary_data = {
