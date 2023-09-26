@@ -1,3 +1,5 @@
+#This is my first ever Python app.
+
 import streamlit as st
 import pandas as pd
 
@@ -6,13 +8,18 @@ st.image("DV_alone.png", caption=None, width=None, use_column_width=None, clamp=
 
 # Set the title and subtitle
 st.title("Pay Award Calculator for Doctors and Dentists in training in England")
+st.subheader("This interactive Python app was made from the math originally done by DV's *Mr. Milo Kostusiak*.")
+
 st.write("This calculator will give you an estimated pay award backpayment, it may not be 100% correct but will give you a chance to compare it to your payslip. If there are big discrepancies, you should raise it with your employer.")
+st.write("The LTFT function is still in testing. It is likely to overestimate backpay.")
+st.write("If you are LTFT, I would recommend using https://bit.ly/LTFT_PayAwardCalculator")
+
+st.write("Pull requests are welcome on the Github Repo.")
 
 # Create two columns
 col1, col2 = st.columns(2)
 
 #Setting Option Values
-
 wknd_options = {
     '<1:8 -- 0%': 0.0,
     '<1:7 - 1:8 -- 3%': 3.0,
@@ -46,19 +53,6 @@ grade_options1 = {
     'ST6': 58398,
     'ST7': 58398,
     'ST8': 58398,
-}
-
-grade_options2 = {
-    'FY1': 32398,
-    'FY2': 37303,
-    'ST1': 43923,
-    'ST2' : 43923,
-    'ST3': 55329,
-    'ST4': 55329,
-    'ST5': 55329,
-    'ST6': 63152,
-    'ST7': 63152,
-    'ST8': 63152,
 }
 
 # Column 1: Data Entry
@@ -178,9 +172,7 @@ with col2:
     formatted_total_awardmth2 = f"{total_awardmth2:.2f}"
     
 
-    formatted_total_pay_award = f"£{total_pay_award:.2f}"
-
-   
+    formatted_total_pay_award = f"£{total_pay_award:.2f}" 
 
   # Create a DataFrame for the summary table
     summary_data = {
@@ -238,3 +230,15 @@ with col1:
 with col2:
     st.metric(label="Weekend Arrs", value=f"£ {Wknd_Arrs:.2f}") 
     st.metric(label="NROC Arrs", value=f"£ {nroc_arrs:.2f}") 
+
+st.markdown(
+"""
+**Assumptions**:
+- Full Time Trainee 
+- Same work schedule between 1st of April and 31st of July 2023
+- No parental leave
+- No unpaid leave othat than strikes (see below under Additional Strike Deductions) 
+
+Some of you would have rotated on 5th of April, thus two days of pay award will be based on you December - April work schedule. Not part of this calculator and therefore there will be some discrepancy (most likely very minimal)
+"""
+)
