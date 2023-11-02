@@ -3,7 +3,7 @@
 import streamlit as st
 import pandas as pd
 
-st.image("DV_alone.png", caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+#st.image("DV_alone.png", caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 #st.subheader("presents...")
 
 # Set the title and subtitle
@@ -46,7 +46,7 @@ grade_options1 = {
     'FY1': 29384,
     'FY2': 34012,
     'ST1': 40257,
-    'ST2' : 40257,
+    'ST2': 40257,
     'ST3': 51017,
     'ST4': 51017,
     'ST5': 51017,
@@ -67,7 +67,7 @@ with col1:
             ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=0.0, value=0.0, key="ltft") / 100.0
     else:
             ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft") / 100.0
-              #  ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft1") / 100.0
+    #  ltft = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft1") / 100.0
     data1_key = f"Apr1_{ltft}"  
     data1 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data0] * ltft, step = 1000.0, key="data1_key")*ltft
     data2 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=7.5, step = 0.1, key="Apr2", min_value=0.0, max_value=100.0)
@@ -106,7 +106,7 @@ with col1:
     data6_awardmth = data6_award/12
     total_awardmth1 = data1_awardmth + data2_awardmth + data3_awardmth + data4_awardmth + data5_awardmth + data6_awardmth
 
-     # Create a DataFrame for the summary table
+# Create a DataFrame for the summary table
     summary_data = {
         "Pay Category": ["Basic Pay", "Additional Pay", "NROC", "Weekend Allowance", "Enhancement Hours", "Flexible Pay", "Total"],
         "Value": [f"£ {data1}", f"£ {data2_calc:.2f}", f"£ {data3_calc:.2f}", f"£ {data4_calc:.2f}", f"£ {data5_calc:.2f}", f"£ {data6_calc:.2f}", f"£ {total_1:.2f}"]
@@ -129,8 +129,8 @@ with col2:
             ltft2 = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=0.0, value=0.0, key="ltft2") / 100.0
     else:
             ltft2 = st.number_input("Proportion Full Time in %", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft2") / 100.0
-  #  ltft2 = st.number_input("Proportion Full Time in %.", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft2") / 100.0
-  #  data7_key = f"Apr1_{ltft2}"  
+#  ltft2 = st.number_input("Proportion Full Time in %.", min_value=0.0, max_value=100.0, value=100.0, step = 10.0, key="ltft2") / 100.0
+#  data7_key = f"Apr1_{ltft2}"  
     data7 = st.number_input("Basic Pay (as per grade)", value=grade_options1[data13] * ltft2, key="Aug1")
     data8 = st.number_input("Additional pay above 40 hours (Found on WS, in hours)", value=5.5, key="Aug2", min_value=0.0, max_value=100.0)
     data9 = st.selectbox("Non-Resident on Call?", nroc_options, key="Aug3", index=1)
@@ -174,7 +174,7 @@ with col2:
 
     formatted_total_pay_award = f"£{total_pay_award:.2f}" 
 
-  # Create a DataFrame for the summary table
+# Create a DataFrame for the summary table
     summary_data = {
         "Pay Category": ["Basic Pay", "Additional Pay", "NROC", "Weekend Allowance", "Enhancement Hours", "Flexible Pay", "Total"],
         "Value": [f"£ {data7}", f"£ {data8_calc:.2f}", f"£ {data9_calc:.2f}", f"£ {data10_calc:.2f}", f"£ {data11_calc:.2f}", f"£ {data12_calc:.2f}", f"£ {total_2:.2f}"]
